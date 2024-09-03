@@ -96,5 +96,4 @@ Acknowledgments
 Inspiration from existing library management and recommendation systems.
 Utilizing open-source libraries such as scikit-learn and pandas.
 Book Recommendation System Example by OpenAI / CC BY 4.0
-
-Replace placeholder URLs with the actual paths to your images or external image links. This will make your README more engaging and informative.
+.
