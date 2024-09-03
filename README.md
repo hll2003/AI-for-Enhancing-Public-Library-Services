@@ -4,6 +4,8 @@
 
 Develop an AI-based system to optimize public library services, including book recommendations, resource management, and community engagement. This project aims to improve user satisfaction and operational efficiency in libraries.
 
+![Library Services Overview](https://example.com/library_services_overview.jpg)  <!-- Replace with your image URL -->
+
 ## Background
 
 Public libraries face challenges in meeting diverse user needs and managing resources effectively. Problems include:
@@ -38,9 +40,10 @@ The AI system will be used in the following ways:
 * **Predictive Analytics:** To forecast book demand and optimize inventory management.
 * **Natural Language Processing (NLP):** To analyze user feedback and identify trends in community engagement.
 
+![Example Recommendation System](https://example.com/recommendation_system.png)  <!-- Replace with your image URL -->
+
 ```python
 # Example code for book recommendation system using collaborative filtering
-
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -65,3 +68,4 @@ def recommend_books(title, cosine_sim=cosine_sim):
     return books['title'].iloc[book_indices]
 
 print(recommend_books('The Great Gatsby'))
+
