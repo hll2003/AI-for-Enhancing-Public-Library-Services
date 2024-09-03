@@ -1,79 +1,67 @@
-# AI-for-Enhancing-Public-Library-Services<!-- This is the markdown template for the final project of the Building AI course, 
-created by Reaktor Innovations and University of Helsinki. 
-Copy the template, paste it to your GitHub README and edit! -->
-
-# Project Title
-
-Final project for the Building AI course
+# AI for Enhancing Public Library Services
 
 ## Summary
 
-Describe briefly in 2-3 sentences what your project is about. About 250 characters is a nice length! 
-
+Develop an AI-based system to optimize public library services, including book recommendations, resource management, and community engagement. This project aims to improve user satisfaction and operational efficiency in libraries.
 
 ## Background
 
-Which problems does your idea solve? How common or frequent is this problem? What is your personal motivation? Why is this topic important or interesting?
+Public libraries face challenges in meeting diverse user needs and managing resources effectively. Problems include:
 
-This is how you make a list, if you need one:
-* problem 1
-* problem 2
-* etc.
+* **Book Recommendation:** Difficulty in suggesting relevant books based on user preferences.
+* **Resource Management:** Inefficient tracking of book loans and returns.
+* **Community Engagement:** Limited interaction and engagement with library patrons.
 
+**Personal Motivation:** Libraries are crucial community resources. Enhancing their services through AI can make them more accessible and user-friendly, benefiting communities as a whole.
 
 ## How is it used?
 
-Describe the process of using the solution. In what kind situations is the solution needed (environment, time, etc.)? Who are the users, what kinds of needs should be taken into account?
+The AI system will be used in the following ways:
 
-Images will make your README look nice!
-Once you upload an image to your repository, you can link link to it like this (replace the URL with file path, if you've uploaded an image to Github.)
-![Cat](https://upload.wikimedia.org/wikipedia/commons/5/5e/Sleeping_cat_on_her_back.jpg)
+* **Book Recommendations:** Users receive personalized book suggestions based on their reading history and preferences.
+* **Resource Management:** The system automates tracking of book loans and returns, and helps in managing inventory.
+* **Community Engagement:** Provides insights into user feedback and engagement trends to improve library services and outreach.
 
-If you need to resize images, you have to use an HTML tag, like this:
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Sleeping_cat_on_her_back.jpg" width="300">
+**Context:** The solution will be used in public libraries, both large and small. It should be adaptable to various library sizes and types, and user-friendly for both library staff and patrons.
 
-This is how you create code examples:
-```
-def main():
-   countries = ['Denmark', 'Finland', 'Iceland', 'Norway', 'Sweden']
-   pop = [5615000, 5439000, 324000, 5080000, 9609000]   # not actually needed in this exercise...
-   fishers = [1891, 2652, 3800, 11611, 1757]
+## Data Sources and AI Methods
 
-   totPop = sum(pop)
-   totFish = sum(fishers)
+**Data Sources:**
 
-   # write your solution here
+* **Library Catalogs:** Data on books, genres, and user loans.
+* **User Profiles:** Information on user preferences and borrowing history.
+* **Community Feedback:** Surveys and feedback forms from library patrons.
 
-   for i in range(len(countries)):
-      print("%s %.2f%%" % (countries[i], 100.0))    # current just prints 100%
+**AI Techniques:**
 
-main()
-```
+* **Recommendation Systems:** To suggest books based on user preferences and reading history.
+* **Predictive Analytics:** To forecast book demand and optimize inventory management.
+* **Natural Language Processing (NLP):** To analyze user feedback and identify trends in community engagement.
 
+```python
+# Example code for book recommendation system using collaborative filtering
 
-## Data sources and AI methods
-Where does your data come from? Do you collect it yourself or do you use data collected by someone else?
-If you need to use links, here's an example:
-[Twitter API](https://developer.twitter.com/en/docs)
+import pandas as pd
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-| Syntax      | Description |
-| ----------- | ----------- |
-| Header      | Title       |
-| Paragraph   | Text        |
+# Load data
+books = pd.read_csv('books.csv')
+user_ratings = pd.read_csv('user_ratings.csv')
 
-## Challenges
+# Create a matrix of book features
+tfidf = TfidfVectorizer(stop_words='english')
+tfidf_matrix = tfidf.fit_transform(books['description'])
 
-What does your project _not_ solve? Which limitations and ethical considerations should be taken into account when deploying a solution like this?
+# Compute similarity matrix
+cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
 
-## What next?
+def recommend_books(title, cosine_sim=cosine_sim):
+    idx = books.index[books['title'] == title].tolist()[0]
+    sim_scores = list(enumerate(cosine_sim[idx]))
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    sim_scores = sim_scores[1:11]
+    book_indices = [i[0] for i in sim_scores]
+    return books['title'].iloc[book_indices]
 
-How could your project grow and become something even more? What kind of skills, what kind of assistance would you  need to move on? 
-
-
-## Acknowledgments
-
-* list here the sources of inspiration 
-* do not use code, images, data etc. from others without permission
-* when you have permission to use other people's materials, always mention the original creator and the open source / Creative Commons licence they've used
-  <br>For example: [Sleeping Cat on Her Back by Umberto Salvagnin](https://commons.wikimedia.org/wiki/File:Sleeping_cat_on_her_back.jpg#filelinks) / [CC BY 2.0](https://creativecommons.org/licenses/by/2.0)
-* etc
+print(recommend_books('The Great Gatsby'))
