@@ -4,7 +4,8 @@
 
 Develop an AI-based system to optimize public library services, including book recommendations, resource management, and community engagement. This project aims to improve user satisfaction and operational efficiency in libraries.
 
-![Library Services Overview](https://example.com/library_services_overview.jpg)  <!-- Replace with your image URL -->
+![Library Services Overview](![image](https://github.com/user-attachments/assets/5ed7f738-4cfc-4d4b-ad62-c58e3fd4a750)
+  <!-- Replace with your image URL -->
 
 ## Background
 
